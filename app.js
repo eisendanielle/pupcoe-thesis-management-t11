@@ -58,14 +58,16 @@ app.use(session({
 }));
 
 app.get('/', function (req, res) {
-	res.redirect('/login');
-});
-
-app.get('/login', function (req, res) {
 	res.render('login', {
 		layout: 'login'
 	});
 });
+
+// app.get('/login', function (req, res) {
+// 	res.render('login', {
+// 		layout: 'login'
+// 	});
+// });
 
 app.get('/dashboard', function (req, res) {
 	res.render('dashboard', {
