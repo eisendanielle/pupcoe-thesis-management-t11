@@ -11,22 +11,22 @@ const Strategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const PORT = process.env.PORT || 5000
 
-const client = new Client({
-	database: 'thesisManagement',
-	user: 'postgres',
-	password: '0910',
-	host: 'localhost',
-	port: 5432
-});
-
 // const client = new Client({
-// 	database: 'd75ha57gs1tpts',
-// 	user: 'edsjawcarzfsti',
-// 	password: 'd2999a94de0b5ee110c2fdd7102287f812ca63a07fbdc54915f35d7a8d52dc54',
-// 	host: 'ec2-54-221-225-11.compute-1.amazonaws.com',
-// 	port: 5432,
-// 	ssl: true
+// 	database: 'thesisManagement',
+// 	user: 'postgres',
+// 	password: '0910',
+// 	host: 'localhost',
+// 	port: 5432
 // });
+
+const client = new Client({
+	database: 'd75ha57gs1tpts',
+	user: 'edsjawcarzfsti',
+	password: 'd2999a94de0b5ee110c2fdd7102287f812ca63a07fbdc54915f35d7a8d52dc54',
+	host: 'ec2-54-221-225-11.compute-1.amazonaws.com',
+	port: 5432,
+	ssl: true
+});
 
 client.connect()
 	.then(function () {
