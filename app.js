@@ -58,7 +58,9 @@ app.use(session({
 }));
 
 app.get('/', function (req, res) {
-	res.redirect('/login');
+	res.redirect('/login', {
+
+	});
 });
 
 app.get('/login', function (req, res) {
@@ -68,8 +70,9 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/dashboard', function (req, res) {
-	res.render('dashboard');
+	res.render('dashboard', {
 
+	});
 });
 
 app.get('/admin', function (req, res) {
