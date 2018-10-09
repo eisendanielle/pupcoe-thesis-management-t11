@@ -58,9 +58,7 @@ app.use(session({
 }));
 
 app.get('/', function (req, res) {
-	res.redirect('/login', {
-
-	});
+	res.redirect('/login');
 });
 
 app.get('/login', function (req, res) {
