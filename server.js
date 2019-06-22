@@ -16,8 +16,6 @@ var Strategy = require('passport-local').Strategy;
 var session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-// var crypto = require('crypto');
-// var async = require('async');
 Handlebars.registerHelper('paginate', paginate);
 MomentHandler.registerHelpers(Handlebars);
 require('dotenv').config();
@@ -41,10 +39,10 @@ var loginRoute = require("./routes/login");
 
 //CLIENT
 const client = new Client({
-  database: 'd7illutusb8n6k',
-  user: 'brsaoynqhwfbam',
-  password: '3c091bbda2a4a994b79ab1745089a83fe208f8966f91fbb2e9245097419ca303',
-  host: 'ec2-54-243-46-32.compute-1.amazonaws.com',
+  database: 'd75ha57gs1tpts',
+  user: 'edsjawcarzfsti',
+  password: 'd2999a94de0b5ee110c2fdd7102287f812ca63a07fbdc54915f35d7a8d52dc54',
+  host: 'ec2-54-221-225-11.compute-1.amazonaws.com',
   port: 5432,
   ssl: true
 });
