@@ -77,6 +77,7 @@ body {
           <th>Title</th>
           <th>Abstract</th>
           <th>Status</th>
+          <th>Head Panel</th>
         </tr>
       </thead>
     </table>
@@ -90,6 +91,7 @@ body {
           <td>{{this.thesis_title}}</td>
           <td><button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#abstract">See Abstract</button></td>
           <td>{{this.stage}}</td>
+          <td>{{this.head_first_name}} {{this.head_last_name}}</td>
         </tr>
         {{/each}}
       </tbody>
