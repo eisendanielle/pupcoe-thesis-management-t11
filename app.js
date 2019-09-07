@@ -1,122 +1,489 @@
 const express = require('express');
 const path = require('path');
 const { Client } = require('pg');
-const exphbs = require('express-handlebars');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const flash = require('express-flash');
-const session = require('express-session');
-const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
-const bcrypt = require('bcryptjs');
-const PORT = process.env.PORT || 5000
+const app = express();
+var types = require('pg').types;
+var exphbs = require('express-handlebars');
+var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
+var Handlebars = require('handlebars');
+var MomentHandler = require('handlebars.moment');
+var hbs = require('nodemailer-express-handlebars');
+var paginate = require('handlebars-paginate');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+var session = require('express-session');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+Handlebars.registerHelper('paginate', paginate);
+MomentHandler.registerHelpers(Handlebars);
+require('dotenv').config();
 
-// const client = new Client({
-// 	database: 'thesisManagement',
-// 	user: 'postgres',
-// 	password: '0910',
-// 	host: 'localhost',
-// 	port: 5432
-// });
+//CALLBACKS
+const Class = require('./models/class.js');
+const User = require('./models/user.js');
+const Committee = require('./models/committee.js');
+const Group = require('./models/group.js');
+const Thesis = require('./models/thesis.js');
 
+
+
+//ROUTES
+var adminRoute = require("./routes/admin_route");
+var facultyRoute = require("./routes/faculty_route");
+var guestRoute = require("./routes/guest_route");
+var nonLoggedRoute = require("./routes/non_logged_route");
+var studentRoute = require("./routes/student_route");
+var loginRoute = require("./routes/login");
+
+//CLIENT
 const client = new Client({
-	database: 'd75ha57gs1tpts',
-	user: 'edsjawcarzfsti',
-	password: 'd2999a94de0b5ee110c2fdd7102287f812ca63a07fbdc54915f35d7a8d52dc54',
-	host: 'ec2-54-221-225-11.compute-1.amazonaws.com',
-	port: 5432,
-	ssl: true
+  database: 'dan6pe0eib3rj6',
+  user: 'oxphibnhubcnqv',
+  password: '0ba8df8a5fb529a2b47b14fc80635e3708a6c92ca4d5d449f8601f4c1515b587',
+  host: 'ec2-50-19-222-129.compute-1.amazonaws.com',
+  port: 5432,
+  ssl: true
+});
+client.connect()
+.then(function () {
+  console.log('Connected to Database!');
+})
+.catch(function () {
+  console.log('Error Connecting to Database');
 });
 
-client.connect()
-	.then(function () {
-		console.log('Connected to database!');
-	})
-	.catch(function () {
-		console.log('Error');
-	})
+//MOMENTJS
+types.setTypeParser(1114, function (stringValue) {
+  return new Date(Date.parse(stringValue + '+0000'));
+});
 
-const app = express();
-app.use(express.static(path.join(__dirname, 'public')));
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+//PASSPORT
+passport.use(new Strategy({
+  usernameField: 'email',
+  passwordField: 'password'
+},
+function (email, password, cb) {
+  User.getByEmail(client, email, function (user) {
+    if (!user) { return cb(null, false); }
+    bcrypt.compare(password, user.password).then(function (res) {
+      if (res === false) { return cb(null, false); }
+      return cb(null, user);
+    });
+  });
+}));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//PASSPORT AUTHENTICATION
+passport.serializeUser(function (user, cb) {
+  cb(null, user.id);
+});
+passport.deserializeUser(function (id, cb) {
+  User.getById(client, id, function (user) {
+    cb(null, user);
+  });
+});
+app.use(cookieParser());
 
+//PASSPORT INITIALIZATION
+app.use(session({
+  key: 'user_sid',
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: 600000
+  }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cookieParser('secret'));
-app.use(flash());
+//PUBLIC OR STATIC FOLDER
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.text({ type: 'text/html' }));
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-	secret: 'This is a secret',
-	resave: false,
-	saveUninitialized: true,
-	cookie: { secure: false }
-}));
-
-app.get('/', function (req, res) {
-	res.render('login', {
-		layout: 'login'
-	});
+//ADMIN INSERT FACULTY
+app.post('/insertfaculty', function (req, res) {
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    if (err) {
+      console.log('error');
+    } else {
+      bcrypt.hash(req.body.password, salt, function (err, hash) {
+        if (err) {
+          console.log('error');
+        } else {
+          User.create(client, {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            phone: req.body.phone,
+            password: hash,
+            user_type: 'faculty',
+            is_admin: req.body.admin
+          }, function (user) {
+            if (user === 'success') {
+              console.log('INSERTED');
+              res.redirect('/faculty/group');
+            } else if (user === 'error') {
+              console.log('error', err);
+              res.render('partials/admin/error', {
+                msg: 'There was a problem adding a Faculty.',
+                msg2: 'Try Again?',
+                title: 'Error',
+                action: 'adding',
+                page: 'faculty',
+                layout: 'admin',
+                link: '/faculty/group'
+              });
+            }
+          });
+        }
+      });
+    }
+  });
 });
 
-// app.get('/login', function (req, res) {
-// 	res.render('login', {
-// 		layout: 'login'
-// 	});
-// });
 
-app.get('/dashboard', function (req, res) {
-	res.render('dashboard', {
-
-	});
+//ADMIN INSERT STUDENT
+app.post('/insertstudent', function (req, res) {
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    if (err) {
+      console.log('error');
+    } else {
+      bcrypt.hash(req.body.password, salt, function (err, hash) {
+        if (err) {
+          console.log('error');
+        } else {
+          User.create(client, {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            student_number: req.body.student_number,
+            // class_id: req.body.class,
+            email: req.body.email,
+            phone: req.body.phone,
+            user_type: 'student',
+            password: hash
+          }, function (user) {
+            if (user === 'success') {
+              console.log('INSERTED');
+              res.redirect('/admin/students');
+            } else if (user === 'error') {
+              res.render('partials/admin/error', {
+                msg: 'There was a problem adding a student.',
+                msg2: 'Try Again?',
+                title: 'Error',
+                action: 'adding',
+                page: 'student',
+                layout: 'admin',
+                link: '/admin/students'
+              });
+            }
+          });
+        }
+      });
+    }
+  });
 });
 
-app.get('/admin', function (req, res) {
-	res.render('admin', {
-
-	});
+//ADMIN INSERT CLASS
+app.post('/insertclass', function (req, res) {
+  Class.create(client, {
+    batch: req.body.batch,
+    section: req.body.section,
+    adviser: req.body.adviser
+  }, function (classes) {
+    if (classes === 'success') {
+      console.log('INSERTED');
+      res.redirect('/admin/class');
+    } else if (classes === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem adding a class.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'adding',
+        page: 'class',
+        layout: 'admin',
+        link: '/admin/class'
+      });
+    }
+  });
 });
 
-app.get('/faculty', function (req, res) {
-	res.render('faculty', {
-
-	});
+//ADMIN INSERT GROUP
+app.post('/insertgroup', function (req, res) {
+  Group.create(client, {
+    group: req.body.group,
+    class: req.body.class
+  }, function (groups) {
+    if (groups === 'success') {
+      console.log('INSERTED');
+      res.redirect('/faculty/group');
+    } else if (groups === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem adding a group.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'adding',
+        page: 'group',
+        layout: 'faculty',
+        link: '/faculty/group'
+      });
+    }
+  });
 });
 
-app.get('/student', function (req, res) {
-	res.render('student', {
-
-	});
+//ADMIN INSERT STUDENT IN CLASS
+app.post('/add_student/:id', function (req, res) {
+  Class.addStudents(client, {
+class: req.params.id,
+student: req.body.studentlist
+  }, function (classes) {
+    if (classes === 'success') {
+      console.log('INSERTED');
+      res.redirect('/admin/class/:id');
+    } else if (classes === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem adding a student.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'adding',
+        page: 'student',
+        layout: 'admin',
+        link: '/admin/class'
+      });
+    }
+  });
 });
 
-app.get('/classes', function (req, res) {
-	res.render('classes', {
-
-	});
+//ADMIN INSERT FACULTY IN COMMITTEE
+app.post('/add_committee', function (req, res) {
+  Committee.addFaculty(client, {
+faculty: req.body.facultylist
+  }, function (committee) {
+    if (committee === 'success') {
+      res.redirect('/admin/committee');
+    } else if (committee === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem adding a committee.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'adding',
+        page: 'committee',
+        layout: 'admin',
+        link: '/admin/committee'
+      });
+    }
+  });
 });
 
-app.get('/add_faculty', function (req, res) {
-	res.render('add_faculty', {
-
-	});
+//FACULTY INSERT STUDENT IN GROUP
+app.post('/add_group/:id', function (req, res) {
+  Group.addStudent(client, {
+group: req.params.id,
+student: req.body.studentlist
+  }, function (groups) {
+    if (groups === 'success') {
+      res.redirect('/faculty/group');
+    } else if (groups === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem adding a student to group.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'adding',
+        page: 'student',
+        layout: 'faculty',
+        link: '/faculty/group'
+      });
+    }
+  });
 });
 
-app.get('/add_student', function (req, res) {
-	res.render('add_student', {
-
-	});
+//STUDENT SUBMIT ABSTRACT
+app.post('/submit', function (req, res) {
+  User.submitThesis(client, {
+group: req.body.group,
+thesistitle: req.body.thesistitle,
+abstract: req.body.abstract
+  }, function (thesis) {
+    if (thesis === 'success') {
+      res.redirect('/student/');
+    } else if (thesis === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem submitting your proposal.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'submitting',
+        page: 'proposal',
+        layout: 'student',
+        link: '/student/submit_abstract'
+      });
+    }
+  });
 });
 
-app.get('/add_classes', function (req, res) {
-	res.render('add_classes', {
-
-	});
+//FACULTY APPROVE
+app.post('/proposal', function (req, res) {
+  Thesis.updateStatus(client, {
+stage: "for committee",
+thesis_id: req.body.thesis_id
+  }, function (thesis) {
+    if (thesis === 'success') {
+      res.redirect('/faculty/thesis');
+    } else if (thesis === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem approving/rejecting the proposal.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'approving/rejecting',
+        page: 'proposal',
+        layout: 'faculty',
+        link: '/faculty/thesis'
+      });
+    }
+  });
+});
+//FACULTY REJECT
+app.post('/proposal_reject', function (req, res) {
+  Thesis.updateStatus(client, {
+stage: "rejected by faculty",
+thesis_id: req.body.thesis_id
+  }, function (thesis) {
+    if (thesis === 'success') {
+      res.redirect('/faculty/thesis');
+    } else if (thesis === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem approving/rejecting the proposal.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'approving/rejecting',
+        page: 'proposal',
+        layout: 'faculty',
+        link: '/faculty/thesis'
+      });
+    }
+  });
 });
 
-app.listen(3000, function () {
-	console.log('Server started at port 3000');
+//COMMITTEE APPROVE/REJECT
+app.post('/proposal/defense', function (req, res) {
+  Thesis.updateStatus(client, {
+stage: "for defense",
+thesis_id: req.body.thesis_id
+  }, function (thesis) {
+    if (thesis === 'success') {
+      res.redirect('/faculty/thesis');
+    } else if (thesis === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem approving/rejecting the proposal.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'approving/rejecting',
+        page: 'proposal',
+        layout: 'faculty',
+        link: '/faculty/thesis'
+      });
+    }
+  });
+});
+
+//COMMITTEE REJECT
+app.post('/proposal/defense_reject', function (req, res) {
+  Thesis.updateStatus(client, {
+stage: "rejected by committee",
+thesis_id: req.body.thesis_id
+  }, function (thesis) {
+    if (thesis === 'success') {
+      res.redirect('/faculty/thesis');
+    } else if (thesis === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem approving/rejecting the proposal.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'approving/rejecting',
+        page: 'proposal',
+        layout: 'faculty',
+        link: '/faculty/thesis'
+      });
+    }
+  });
+});
+
+//STUDENT THESIS TO USE FOR DEFENSE
+app.post('/proposal/use_defense', function (req, res) {
+  Thesis.updateStatus(client, {
+stage: "MOR",
+thesis_id: req.body.thesis_id
+  }, function (thesis) {
+    if (thesis === 'success') {
+      res.redirect('/student/choose');
+    } else if (thesis === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem choosing the proposal.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'choosing',
+        page: 'proposal',
+        layout: 'student',
+        link: '/student/choose'
+      });
+    }
+  });
+});
+
+//SEE THESIS STATUS
+app.get('/status',
+  function (req, res, next) {
+      if (req.isAuthenticated() && req.user.user_type == 'faculty' || 'student') {
+      Thesis.listHeadPanel(client, {}, function (thesis) {
+        console.log(thesis);
+        res.render('partials/status', {
+          layout: 'faculty',
+          title: 'Thesis',
+          thesis: thesis
+        });
+      });
+    } else {
+      res.redirect('/')
+    }
+  });
+
+
+
+//ASSIGN HEAD PANELIST
+app.post('/assign', function (req, res) {
+  Thesis.updateHeadPanel(client, {
+head: req.body.facultylist,
+thesis_id: req.body.thesis_id
+  }, function (thesis) {
+    if (thesis === 'success') {
+      res.redirect('/faculty/mor');
+    } else if (thesis === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem choosing the panel.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'choosing',
+        page: 'panel',
+        layout: 'faculty',
+        link: '/faculty/mor'
+      });
+    }
+  });
+});
+//ROUTES
+app.use("/admin", adminRoute);
+app.use("/faculty", facultyRoute);
+app.use("/guest", guestRoute);
+app.use("/visitor", nonLoggedRoute);
+app.use("/student", studentRoute);
+app.use("/", loginRoute);
+
+// SERVER
+app.listen(process.env.PORT || 4000, function () {
+  console.log('Server started at port 4000');
 });

@@ -33,7 +33,6 @@ input, button {
   height: 100%;
   transition: transform 1.2s ease-in-out;
   padding: 50px 90px 0;
-  border: 0.3px solid gray;
 }
 .sub-cont {
   overflow: hidden;
@@ -181,7 +180,7 @@ label span {
 }
 input {
   display: block;
-  width: 100%;
+  width: 50%;
   margin-top: 5px;
   padding-bottom: 5px;
   font-size: 16px;
@@ -243,13 +242,13 @@ input {
 
 <div class="cont">
   <form class="form sign-in" action="/login" id="login-form" method="POST" role="form" style="margin:0px !important; padding: 50px 60px 0 !important;">
-    <h2>Welcome Back</h2>
+    <h2>Login</h2>
     <label>Email</label>
-    <input name="email" type="email" />
+    <center><input name="email" type="email" /></center>
     <label>Password</label>
-    <input name="password" type="password" />
+    <center><input name="password" type="password" /></center>
     <center style="margin-top:19px; font-size:12px;"><p><a href="/forgot">FORGOT PASSWORD?</a></p></center>
-    <input class="btn btn-dark col-md-12" type="submit" style="color: white;" value="Sign In"></input>
+    <center><input class="btn btn-dark col-md-6" type="submit" style="color: black; background:none; border-radius: 30px !important; border: 1px solid black !important;" value="Sign In"></input></center>
   </form>
 
   </div>

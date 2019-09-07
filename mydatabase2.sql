@@ -15,7 +15,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: SCHEMA "public"; Type: COMMENT; Schema: -; Owner: edsjawcarzfsti
+-- Name: SCHEMA "public"; Type: COMMENT; Schema: -; Owner: oxphibnhubcnqv
 --
 
 COMMENT ON SCHEMA "public" IS 'standard public schema';
@@ -36,7 +36,7 @@ COMMENT ON SCHEMA "public" IS 'standard public schema';
 
 
 --
--- Name: user_type; Type: TYPE; Schema: public; Owner: edsjawcarzfsti
+-- Name: user_type; Type: TYPE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TYPE "public"."user_type" AS ENUM (
@@ -46,14 +46,14 @@ CREATE TYPE "public"."user_type" AS ENUM (
 );
 
 
-ALTER TYPE public.user_type OWNER TO edsjawcarzfsti;
+ALTER TYPE public.user_type OWNER TO oxphibnhubcnqv;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: classStudents; Type: TABLE; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents; Type: TABLE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TABLE "public"."classStudents" (
@@ -63,10 +63,10 @@ CREATE TABLE "public"."classStudents" (
 );
 
 
-ALTER TABLE public."classStudents" OWNER TO edsjawcarzfsti;
+ALTER TABLE public."classStudents" OWNER TO oxphibnhubcnqv;
 
 --
--- Name: classStudents_id_seq; Type: SEQUENCE; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents_id_seq; Type: SEQUENCE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE SEQUENCE "public"."classStudents_id_seq"
@@ -78,17 +78,17 @@ CREATE SEQUENCE "public"."classStudents_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."classStudents_id_seq" OWNER TO edsjawcarzfsti;
+ALTER TABLE public."classStudents_id_seq" OWNER TO oxphibnhubcnqv;
 
 --
--- Name: classStudents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER SEQUENCE "public"."classStudents_id_seq" OWNED BY "public"."classStudents"."id";
 
 
 --
--- Name: classes; Type: TABLE; Schema: public; Owner: edsjawcarzfsti
+-- Name: classes; Type: TABLE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TABLE "public"."classes" (
@@ -99,10 +99,10 @@ CREATE TABLE "public"."classes" (
 );
 
 
-ALTER TABLE public.classes OWNER TO edsjawcarzfsti;
+ALTER TABLE public.classes OWNER TO oxphibnhubcnqv;
 
 --
--- Name: classes_id_seq; Type: SEQUENCE; Schema: public; Owner: edsjawcarzfsti
+-- Name: classes_id_seq; Type: SEQUENCE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE SEQUENCE "public"."classes_id_seq"
@@ -114,17 +114,17 @@ CREATE SEQUENCE "public"."classes_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public.classes_id_seq OWNER TO edsjawcarzfsti;
+ALTER TABLE public.classes_id_seq OWNER TO oxphibnhubcnqv;
 
 --
--- Name: classes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: edsjawcarzfsti
+-- Name: classes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER SEQUENCE "public"."classes_id_seq" OWNED BY "public"."classes"."id";
 
 
 --
--- Name: facultyCommittee; Type: TABLE; Schema: public; Owner: edsjawcarzfsti
+-- Name: facultyCommittee; Type: TABLE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TABLE "public"."facultyCommittee" (
@@ -133,10 +133,10 @@ CREATE TABLE "public"."facultyCommittee" (
 );
 
 
-ALTER TABLE public."facultyCommittee" OWNER TO edsjawcarzfsti;
+ALTER TABLE public."facultyCommittee" OWNER TO oxphibnhubcnqv;
 
 --
--- Name: facultyCommittee_id_seq; Type: SEQUENCE; Schema: public; Owner: edsjawcarzfsti
+-- Name: facultyCommittee_id_seq; Type: SEQUENCE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE SEQUENCE "public"."facultyCommittee_id_seq"
@@ -148,17 +148,17 @@ CREATE SEQUENCE "public"."facultyCommittee_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."facultyCommittee_id_seq" OWNER TO edsjawcarzfsti;
+ALTER TABLE public."facultyCommittee_id_seq" OWNER TO oxphibnhubcnqv;
 
 --
--- Name: facultyCommittee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: edsjawcarzfsti
+-- Name: facultyCommittee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER SEQUENCE "public"."facultyCommittee_id_seq" OWNED BY "public"."facultyCommittee"."id";
 
 
 --
--- Name: groupStudents; Type: TABLE; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents; Type: TABLE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TABLE "public"."groupStudents" (
@@ -168,10 +168,10 @@ CREATE TABLE "public"."groupStudents" (
 );
 
 
-ALTER TABLE public."groupStudents" OWNER TO edsjawcarzfsti;
+ALTER TABLE public."groupStudents" OWNER TO oxphibnhubcnqv;
 
 --
--- Name: groupStudents_id_seq; Type: SEQUENCE; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents_id_seq; Type: SEQUENCE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE SEQUENCE "public"."groupStudents_id_seq"
@@ -183,17 +183,17 @@ CREATE SEQUENCE "public"."groupStudents_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."groupStudents_id_seq" OWNER TO edsjawcarzfsti;
+ALTER TABLE public."groupStudents_id_seq" OWNER TO oxphibnhubcnqv;
 
 --
--- Name: groupStudents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER SEQUENCE "public"."groupStudents_id_seq" OWNED BY "public"."groupStudents"."id";
 
 
 --
--- Name: groups; Type: TABLE; Schema: public; Owner: edsjawcarzfsti
+-- Name: groups; Type: TABLE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TABLE "public"."groups" (
@@ -203,10 +203,10 @@ CREATE TABLE "public"."groups" (
 );
 
 
-ALTER TABLE public.groups OWNER TO edsjawcarzfsti;
+ALTER TABLE public.groups OWNER TO oxphibnhubcnqv;
 
 --
--- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: edsjawcarzfsti
+-- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE SEQUENCE "public"."groups_id_seq"
@@ -218,17 +218,17 @@ CREATE SEQUENCE "public"."groups_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public.groups_id_seq OWNER TO edsjawcarzfsti;
+ALTER TABLE public.groups_id_seq OWNER TO oxphibnhubcnqv;
 
 --
--- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: edsjawcarzfsti
+-- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER SEQUENCE "public"."groups_id_seq" OWNED BY "public"."groups"."id";
 
 
 --
--- Name: thesis; Type: TABLE; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis; Type: TABLE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TABLE "public"."thesis" (
@@ -243,10 +243,10 @@ CREATE TABLE "public"."thesis" (
 );
 
 
-ALTER TABLE public.thesis OWNER TO edsjawcarzfsti;
+ALTER TABLE public.thesis OWNER TO oxphibnhubcnqv;
 
 --
--- Name: thesis_id_seq; Type: SEQUENCE; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis_id_seq; Type: SEQUENCE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE SEQUENCE "public"."thesis_id_seq"
@@ -258,17 +258,17 @@ CREATE SEQUENCE "public"."thesis_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public.thesis_id_seq OWNER TO edsjawcarzfsti;
+ALTER TABLE public.thesis_id_seq OWNER TO oxphibnhubcnqv;
 
 --
--- Name: thesis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER SEQUENCE "public"."thesis_id_seq" OWNED BY "public"."thesis"."id";
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: edsjawcarzfsti
+-- Name: users; Type: TABLE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE TABLE "public"."users" (
@@ -284,10 +284,10 @@ CREATE TABLE "public"."users" (
 );
 
 
-ALTER TABLE public.users OWNER TO edsjawcarzfsti;
+ALTER TABLE public.users OWNER TO oxphibnhubcnqv;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: edsjawcarzfsti
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: oxphibnhubcnqv
 --
 
 CREATE SEQUENCE "public"."users_id_seq"
@@ -299,66 +299,66 @@ CREATE SEQUENCE "public"."users_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public.users_id_seq OWNER TO edsjawcarzfsti;
+ALTER TABLE public.users_id_seq OWNER TO oxphibnhubcnqv;
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: edsjawcarzfsti
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER SEQUENCE "public"."users_id_seq" OWNED BY "public"."users"."id";
 
 
 --
--- Name: classStudents id; Type: DEFAULT; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents id; Type: DEFAULT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."classStudents" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."classStudents_id_seq"'::"regclass");
 
 
 --
--- Name: classes id; Type: DEFAULT; Schema: public; Owner: edsjawcarzfsti
+-- Name: classes id; Type: DEFAULT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."classes" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."classes_id_seq"'::"regclass");
 
 
 --
--- Name: facultyCommittee id; Type: DEFAULT; Schema: public; Owner: edsjawcarzfsti
+-- Name: facultyCommittee id; Type: DEFAULT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."facultyCommittee" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."facultyCommittee_id_seq"'::"regclass");
 
 
 --
--- Name: groupStudents id; Type: DEFAULT; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents id; Type: DEFAULT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."groupStudents" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."groupStudents_id_seq"'::"regclass");
 
 
 --
--- Name: groups id; Type: DEFAULT; Schema: public; Owner: edsjawcarzfsti
+-- Name: groups id; Type: DEFAULT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."groups" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."groups_id_seq"'::"regclass");
 
 
 --
--- Name: thesis id; Type: DEFAULT; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis id; Type: DEFAULT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."thesis" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."thesis_id_seq"'::"regclass");
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: edsjawcarzfsti
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."users" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."users_id_seq"'::"regclass");
 
 
 --
--- Data for Name: classStudents; Type: TABLE DATA; Schema: public; Owner: edsjawcarzfsti
+-- Data for Name: classStudents; Type: TABLE DATA; Schema: public; Owner: oxphibnhubcnqv
 --
 
 -- COPY "public"."classStudents" ("id", "class_id", "student_id") FROM stdin;
@@ -368,7 +368,7 @@ ALTER TABLE ONLY "public"."users" ALTER COLUMN "id" SET DEFAULT "nextval"('"publ
 
 
 --
--- Data for Name: classes; Type: TABLE DATA; Schema: public; Owner: edsjawcarzfsti
+-- Data for Name: classes; Type: TABLE DATA; Schema: public; Owner: oxphibnhubcnqv
 --
 
 -- COPY "public"."classes" ("id", "batch", "section", "adviser") FROM stdin;
@@ -378,7 +378,7 @@ ALTER TABLE ONLY "public"."users" ALTER COLUMN "id" SET DEFAULT "nextval"('"publ
 
 
 --
--- Data for Name: facultyCommittee; Type: TABLE DATA; Schema: public; Owner: edsjawcarzfsti
+-- Data for Name: facultyCommittee; Type: TABLE DATA; Schema: public; Owner: oxphibnhubcnqv
 --
 
 -- COPY "public"."facultyCommittee" ("id", "faculty_id") FROM stdin;
@@ -387,7 +387,7 @@ ALTER TABLE ONLY "public"."users" ALTER COLUMN "id" SET DEFAULT "nextval"('"publ
 
 
 --
--- Data for Name: groupStudents; Type: TABLE DATA; Schema: public; Owner: edsjawcarzfsti
+-- Data for Name: groupStudents; Type: TABLE DATA; Schema: public; Owner: oxphibnhubcnqv
 --
 
 -- COPY "public"."groupStudents" ("id", "group_id", "student_id") FROM stdin;
@@ -396,7 +396,7 @@ ALTER TABLE ONLY "public"."users" ALTER COLUMN "id" SET DEFAULT "nextval"('"publ
 
 
 --
--- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: edsjawcarzfsti
+-- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: oxphibnhubcnqv
 --
 
 -- COPY "public"."groups" ("id", "groupname", "class") FROM stdin;
@@ -406,7 +406,7 @@ ALTER TABLE ONLY "public"."users" ALTER COLUMN "id" SET DEFAULT "nextval"('"publ
 
 
 --
--- Data for Name: thesis; Type: TABLE DATA; Schema: public; Owner: edsjawcarzfsti
+-- Data for Name: thesis; Type: TABLE DATA; Schema: public; Owner: oxphibnhubcnqv
 --
 
 -- COPY "public"."thesis" ("id", "thesis_title", "group_id", "stage", "abstract", "comment", "head_panelist", "date_updated") FROM stdin;
@@ -415,7 +415,7 @@ ALTER TABLE ONLY "public"."users" ALTER COLUMN "id" SET DEFAULT "nextval"('"publ
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: edsjawcarzfsti
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: oxphibnhubcnqv
 --
 
 COPY "public"."users" ("id", "email", "password", "first_name", "last_name", "student_number", "phone", "user_type", "is_admin") FROM stdin;
@@ -424,56 +424,56 @@ COPY "public"."users" ("id", "email", "password", "first_name", "last_name", "st
 
 
 --
--- Name: classStudents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oxphibnhubcnqv
 --
 
 SELECT pg_catalog.setval('"public"."classStudents_id_seq"', 34, true);
 
 
 --
--- Name: classes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edsjawcarzfsti
+-- Name: classes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oxphibnhubcnqv
 --
 
 SELECT pg_catalog.setval('"public"."classes_id_seq"', 34, true);
 
 
 --
--- Name: facultyCommittee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edsjawcarzfsti
+-- Name: facultyCommittee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oxphibnhubcnqv
 --
 
 SELECT pg_catalog.setval('"public"."facultyCommittee_id_seq"', 33, true);
 
 
 --
--- Name: groupStudents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oxphibnhubcnqv
 --
 
 SELECT pg_catalog.setval('"public"."groupStudents_id_seq"', 1, true);
 
 
 --
--- Name: groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edsjawcarzfsti
+-- Name: groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oxphibnhubcnqv
 --
 
 SELECT pg_catalog.setval('"public"."groups_id_seq"', 2, true);
 
 
 --
--- Name: thesis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oxphibnhubcnqv
 --
 
 SELECT pg_catalog.setval('"public"."thesis_id_seq"', 2, true);
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edsjawcarzfsti
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oxphibnhubcnqv
 --
 
 SELECT pg_catalog.setval('"public"."users_id_seq"', 39, true);
 
 
 --
--- Name: classStudents classStudents_pkey; Type: CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents classStudents_pkey; Type: CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."classStudents"
@@ -481,7 +481,7 @@ ALTER TABLE ONLY "public"."classStudents"
 
 
 --
--- Name: classes classes_pkey; Type: CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: classes classes_pkey; Type: CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."classes"
@@ -489,7 +489,7 @@ ALTER TABLE ONLY "public"."classes"
 
 
 --
--- Name: facultyCommittee facultyCommittee_pkey; Type: CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: facultyCommittee facultyCommittee_pkey; Type: CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."facultyCommittee"
@@ -497,7 +497,7 @@ ALTER TABLE ONLY "public"."facultyCommittee"
 
 
 --
--- Name: groupStudents groupStudents_pkey; Type: CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents groupStudents_pkey; Type: CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."groupStudents"
@@ -505,7 +505,7 @@ ALTER TABLE ONLY "public"."groupStudents"
 
 
 --
--- Name: groups groups_pkey; Type: CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: groups groups_pkey; Type: CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."groups"
@@ -513,7 +513,7 @@ ALTER TABLE ONLY "public"."groups"
 
 
 --
--- Name: thesis thesis_pkey; Type: CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis thesis_pkey; Type: CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."thesis"
@@ -521,7 +521,7 @@ ALTER TABLE ONLY "public"."thesis"
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."users"
@@ -529,7 +529,7 @@ ALTER TABLE ONLY "public"."users"
 
 
 --
--- Name: classStudents classStudents_class_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents classStudents_class_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."classStudents"
@@ -537,7 +537,7 @@ ALTER TABLE ONLY "public"."classStudents"
 
 
 --
--- Name: classStudents classStudents_student_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: classStudents classStudents_student_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."classStudents"
@@ -545,7 +545,7 @@ ALTER TABLE ONLY "public"."classStudents"
 
 
 --
--- Name: classes classes_adviser_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: classes classes_adviser_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."classes"
@@ -553,7 +553,7 @@ ALTER TABLE ONLY "public"."classes"
 
 
 --
--- Name: facultyCommittee facultyCommittee_faculty_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: facultyCommittee facultyCommittee_faculty_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."facultyCommittee"
@@ -561,7 +561,7 @@ ALTER TABLE ONLY "public"."facultyCommittee"
 
 
 --
--- Name: groupStudents groupStudents_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents groupStudents_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."groupStudents"
@@ -569,7 +569,7 @@ ALTER TABLE ONLY "public"."groupStudents"
 
 
 --
--- Name: groupStudents groupStudents_student_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: groupStudents groupStudents_student_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."groupStudents"
@@ -577,7 +577,7 @@ ALTER TABLE ONLY "public"."groupStudents"
 
 
 --
--- Name: groups groups_class_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: groups groups_class_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."groups"
@@ -585,7 +585,7 @@ ALTER TABLE ONLY "public"."groups"
 
 
 --
--- Name: thesis thesis_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis thesis_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."thesis"
@@ -593,7 +593,7 @@ ALTER TABLE ONLY "public"."thesis"
 
 
 --
--- Name: thesis thesis_head_panelist_fkey; Type: FK CONSTRAINT; Schema: public; Owner: edsjawcarzfsti
+-- Name: thesis thesis_head_panelist_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oxphibnhubcnqv
 --
 
 ALTER TABLE ONLY "public"."thesis"

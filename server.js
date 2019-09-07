@@ -39,10 +39,10 @@ var loginRoute = require("./routes/login");
 
 //CLIENT
 const client = new Client({
-  database: 'd75ha57gs1tpts',
-  user: 'edsjawcarzfsti',
-  password: 'd2999a94de0b5ee110c2fdd7102287f812ca63a07fbdc54915f35d7a8d52dc54',
-  host: 'ec2-54-221-225-11.compute-1.amazonaws.com',
+  database: 'dan6pe0eib3rj6',
+  user: 'oxphibnhubcnqv',
+  password: '0ba8df8a5fb529a2b47b14fc80635e3708a6c92ca4d5d449f8601f4c1515b587',
+  host: 'ec2-50-19-222-129.compute-1.amazonaws.com',
   port: 5432,
   ssl: true
 });
