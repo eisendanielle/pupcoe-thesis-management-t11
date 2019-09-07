@@ -10,10 +10,10 @@ module.exports = (function() {
   var facultyRoute = require ('express').Router();
 
 const client = new Client({
-  database: 'd7illutusb8n6k',
-  user: 'brsaoynqhwfbam',
-  password: '3c091bbda2a4a994b79ab1745089a83fe208f8966f91fbb2e9245097419ca303',
-  host: 'ec2-54-243-46-32.compute-1.amazonaws.com',
+  database: 'dan6pe0eib3rj6',
+  user: 'oxphibnhubcnqv',
+  password: '0ba8df8a5fb529a2b47b14fc80635e3708a6c92ca4d5d449f8601f4c1515b587',
+  host: 'ec2-50-19-222-129.compute-1.amazonaws.com',
   port: 5432,
   ssl: true
 });
