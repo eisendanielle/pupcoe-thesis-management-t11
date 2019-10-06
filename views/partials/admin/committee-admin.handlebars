@@ -2,7 +2,7 @@
   <h1 class="h3">Committee</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#add-students">Add Committee</button>
+      <button type="button" id="add-toggle" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#add-committee">Add Committee</button>
     </div>
 
   </div>
@@ -23,7 +23,9 @@
       <td>{{this.first_name}} {{this.last_name}}</td>
       <td>{{this.email}}</td>
       <td>{{this.phone}}</td>
-      <td><a href='/admin/faculty/{{this.id}}'>view</a></td>
+      <td>
+         <button type="button" id="remove-toggle" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#delete-committee">Remove</button>
+      </td>
     </tr>
     {{/each}}
   </tbody>
@@ -31,11 +33,11 @@
 </div>
 
 
-<div class="modal fade" id="add-students" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal" id="add-committee" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Select Students</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Select Faculty</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -53,9 +55,33 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: black; border-radius: 30px !important; background: none !important; border: 1px solid black !important;">Close</button>
-        <input class="btn btn-primary" type="submit" value="SAVE CHANGES" style="color: black; border-radius: 30px !important; background: none !important; border: 1px solid black !important;"></input>
+        <input class="btn btn-primary" type="submit" value="SAVE CHANGES" style="padding: .375rem .75rem !important; color: black; border-radius: 30px !important; background: none !important; border: 1px solid black !important;"></input>
       </div>
     </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="modal" id="delete-committee" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Delete Member</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action="/delete_committee/{{this.id}}" method="POST" role="form">
+        <p>Are you sure you want to remove faculty as committee member?</p>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: black; border-radius: 30px !important; background: none !important; border: 1px solid black !important; width: 100%;">No</button>
+        <input class="btn btn-primary" type="submit" value="Yes" style="padding: .375rem .75rem !important; color: black; border-radius: 30px !important; background: none !important; border: 1px solid black !important;"></input>
+        </div>
+        </form>
     </div>
   </div>
 </div>

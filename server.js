@@ -32,8 +32,6 @@ const Thesis = require('./models/thesis.js');
 //ROUTES
 var adminRoute = require("./routes/admin_route");
 var facultyRoute = require("./routes/faculty_route");
-var guestRoute = require("./routes/guest_route");
-var nonLoggedRoute = require("./routes/non_logged_route");
 var studentRoute = require("./routes/student_route");
 var loginRoute = require("./routes/login");
 
@@ -127,7 +125,6 @@ app.post('/insertfaculty', function (req, res) {
             is_admin: req.body.admin
           }, function (user) {
             if (user === 'success') {
-              console.log('INSERTED');
               res.redirect('/faculty/group');
             } else if (user === 'error') {
               console.log('error', err);
@@ -170,7 +167,6 @@ app.post('/insertstudent', function (req, res) {
             password: hash
           }, function (user) {
             if (user === 'success') {
-              console.log('INSERTED');
               res.redirect('/admin/students');
             } else if (user === 'error') {
               res.render('partials/admin/error', {
@@ -198,7 +194,6 @@ app.post('/insertclass', function (req, res) {
     adviser: req.body.adviser
   }, function (classes) {
     if (classes === 'success') {
-      console.log('INSERTED');
       res.redirect('/admin/class');
     } else if (classes === 'error') {
       res.render('partials/admin/error', {
@@ -221,7 +216,6 @@ app.post('/insertgroup', function (req, res) {
     class: req.body.class
   }, function (groups) {
     if (groups === 'success') {
-      console.log('INSERTED');
       res.redirect('/faculty/group');
     } else if (groups === 'error') {
       res.render('partials/admin/error', {
@@ -244,7 +238,6 @@ class: req.params.id,
 student: req.body.studentlist
   }, function (classes) {
     if (classes === 'success') {
-      console.log('INSERTED');
       res.redirect('/admin/class/:id');
     } else if (classes === 'error') {
       res.render('partials/admin/error', {
@@ -281,6 +274,25 @@ faculty: req.body.facultylist
   });
 });
 
+//ADMIN DELETE FACULTY IN COMMITTEE
+app.post('/delete_committee/:id', function (req, res) {
+  Committee.deleteCommittee(client, req.params.id, function (committee) {
+    if (committee === 'success') {
+      res.redirect('/admin/committee');
+    } else if (committee === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem deleting the committee from the list.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'deleting',
+        page: 'committee',
+        layout: 'admin',
+        link: '/admin/committee'
+      });
+    }
+  });
+});
+
 //FACULTY INSERT STUDENT IN GROUP
 app.post('/add_group/:id', function (req, res) {
   Group.addStudent(client, {
@@ -295,6 +307,25 @@ student: req.body.studentlist
         msg2: 'Try Again?',
         title: 'Error',
         action: 'adding',
+        page: 'student',
+        layout: 'faculty',
+        link: '/faculty/group'
+      });
+    }
+  });
+});
+
+//FACULTY REMOVE STUDENT IN GROUP
+app.post('/delete_student/:id', function (req, res) {
+  Group.deleteStudent(client, req.params.id, function (groups) {
+    if (groups === 'success') {
+      res.redirect('/faculty/group');
+    } else if (groups === 'error') {
+      res.render('partials/admin/error', {
+        msg: 'There was a problem removing the student from group.',
+        msg2: 'Try Again?',
+        title: 'Error',
+        action: 'removing',
         page: 'student',
         layout: 'faculty',
         link: '/faculty/group'
@@ -347,6 +378,7 @@ thesis_id: req.body.thesis_id
     }
   });
 });
+
 //FACULTY REJECT
 app.post('/proposal_reject', function (req, res) {
   Thesis.updateStatus(client, {
@@ -440,7 +472,6 @@ app.get('/status',
   function (req, res, next) {
       if (req.isAuthenticated() && req.user.user_type == 'faculty' || 'student') {
       Thesis.listHeadPanel(client, {}, function (thesis) {
-        console.log(thesis);
         res.render('partials/status', {
           layout: 'faculty',
           title: 'Thesis',
@@ -451,8 +482,6 @@ app.get('/status',
       res.redirect('/')
     }
   });
-
-
 
 //ASSIGN HEAD PANELIST
 app.post('/assign', function (req, res) {
@@ -478,8 +507,6 @@ thesis_id: req.body.thesis_id
 //ROUTES
 app.use("/admin", adminRoute);
 app.use("/faculty", facultyRoute);
-app.use("/guest", guestRoute);
-app.use("/visitor", nonLoggedRoute);
 app.use("/student", studentRoute);
 app.use("/", loginRoute);
 

@@ -167,7 +167,6 @@ adminRoute.get('/class/:id',
     if (req.isAuthenticated() && req.user.is_admin) {
       Class.getById(client, req.params.id, function (classData) {
         Class.getStudentsByClassId(client, req.params.id, function (classStudents) {
-        console.log('CLASS STUDENTS', classStudents);
         User.noClassList(client, 'student', function (user) {
             res.render('partials/admin/class-list-admin', {
               classes: classData,
@@ -222,7 +221,6 @@ adminRoute.post('/insertguest', function (req, res) {
     category_name: req.body.name
   }, function (category) {
     if (category === 'SUCCESS') {
-      console.log('INSERTED');
       res.redirect('/admin/guests');
     } else if (category === 'ERROR') {
       res.render('partials/admin/error', {

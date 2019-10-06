@@ -70,7 +70,6 @@ facultyRoute.get('/group',
   function (req, res, next) {
       if (req.isAuthenticated() && req.user.user_type == 'faculty') {
       Group.list(client, {}, function (groups) {
-        console.log(groups);
         res.render('partials/faculty/groups', {
           layout: 'faculty',
           title: 'Groups',
@@ -105,7 +104,6 @@ facultyRoute.get('/group/:id',
       if (req.isAuthenticated() && req.user.user_type == 'faculty') {
       Group.getById(client, req.params.id, function (groupData) {
         Group.getStudentsByGroupId(client, req.params.id, function (classStudents) {
-        console.log('GROUP NAME', groupData);
         Group.noGroupList(client, 'student', function (user) {
             res.render('partials/faculty/group-list', {
               groups: groupData,
@@ -131,7 +129,6 @@ facultyRoute.get('/thesis',
         Thesis.checkIfCommittee(client, req.user.id, function(data) {
       Thesis.list(client, {}, function (thesis) {
               Thesis.listCommittee(client, {}, function (committeeApproval) {
-        console.log(thesis);
         res.render('partials/faculty/thesis', {
           layout: 'faculty',
           title: 'Thesis',
@@ -156,7 +153,6 @@ facultyRoute.get('/mor',
       // Thesis.listForMor(client, {}, function (thesis) {
         Thesis.listHeadPanel(client, {}, function(head){
         User.list(client, 'faculty', function(faculty){
-        console.log(thesis);
         res.render('partials/faculty/assign', {
           layout: 'faculty',
           title: 'Thesis',

@@ -18,27 +18,3 @@
       <a class="btn btn-dark col-md-9 back" href="/admin/brands">BACK</a>
   </div>
 </div>
-
-<script type="text/javascript">
-$(function() {
-  $('input').on('change', function() {
-    var input = $(this);
-    if (input.val().length) {
-      input.addClass('populated');
-    } else {
-      input.removeClass('populated');
-    }
-  });
-
-  setTimeout(function() {
-    $('#fname').trigger('focus');
-  }, 500);
-});
-</script>
-<script type="text/javascript">
-$(window).on("load resize ", function() {
-  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
-}).resize();
-
-</script>

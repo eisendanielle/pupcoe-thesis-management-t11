@@ -3,14 +3,6 @@
 <form action="/submit" method="POST" role="form" enctype="application/x-www-form-urlencoded">
   <fieldset>
     <div class="form-row" style="margin-bottom: 14px;">
-      <div class="col">
-        <label>Group</label>
-          <select  name="group" class="form-control" id="group" required>
-         {{#each data}}
-          <option value ="{{this.id}}">{{this.groupname}}</option>
-          {{/each}}
-          </select>
-      </div>
     </div>
     <div class="form-row" style="margin-bottom: 14px;">
       <div class="col">
@@ -26,9 +18,9 @@
     </div>
     <br>
     <div class="row">
-    <input class="btn btn-dark col-md-12" type="submit" value="SUBMIT"></input>
-          <a class="btn btn-dark col-md-12 back" href="/status">SEE PROPOSAL STATUSES</a>
-                    <a class="btn btn-dark col-md-12" href="/student/choose">CHOOSE THESIS FOR DEFENSE</a>
+    <input class="btn btn-dark col-md-12" type="submit" value="SUBMIT" style="padding:.375rem .75rem; margin-top: 10px; color: black; background:none; border-radius: 30px !important; border: 1px solid black !important;"></input>
+          <a class="btn btn-dark col-md-12 back" href="/status" style="padding:.375rem .75rem; margin-top: 10px; color: black; background:none; border-radius: 30px !important; border: 1px solid black !important;">SEE PROPOSAL STATUSES</a>
+                    <a class="btn btn-dark col-md-12" href="/student/choose" style=" margin-top: 10px; color: black; background:none; border-radius: 30px !important; border: 1px solid black !important;">CHOOSE THESIS FOR DEFENSE</a>
   </div>
   </fieldset>
 </form> 

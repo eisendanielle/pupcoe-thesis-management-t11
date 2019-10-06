@@ -125,7 +125,7 @@ $('.pagination-inner a').on('click', function() {
 </script>
 
 {{#each thesis}}
-<div class="modal fade" id="abstract" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal" id="abstract" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -205,7 +205,7 @@ $('.pagination-inner a').on('click', function() {
 </script>
 
 {{#each committeeApproval}}
-<div class="modal fade" id="abstract" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal" id="abstract" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -220,5 +220,7 @@ $('.pagination-inner a').on('click', function() {
 </div>
 {{/each}}
  {{/if}}
-           <a class="btn btn-dark col-md-12 back" href="/faculty/mor">ASSIGN HEAD PANELIST</a>
-           <a class="btn btn-dark col-md-12 back" href="/status">SEE PROPOSAL STATUSES</a>
+<center>
+             <a class="btn btn-dark col-md-5 back" href="/faculty/mor" style="color: black; background:none; border-radius: 30px !important; border: 1px solid black !important;">ASSIGN HEAD PANELIST</a>
+           <a class="btn btn-dark col-md-5 back" href="/status" style="color: black; background:none; border-radius: 30px !important; border: 1px solid black !important;">SEE PROPOSAL STATUSES</a>
+</center>

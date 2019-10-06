@@ -42,7 +42,6 @@ var User = {
       ORDER BY id
     `;
     client.query(userListQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -54,7 +53,6 @@ var User = {
       WHERE user_type = 'student' AND id NOT IN (SELECT DISTINCT student_id FROM "classStudents")
     `;
     client.query(query, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
