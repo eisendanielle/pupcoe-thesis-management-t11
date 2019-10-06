@@ -8,8 +8,9 @@ var Committee = {
       INNER JOIN users u on c.faculty_id = u.id
     `;
       // WHERE c.class_id = ${classId}
+      // DELETE
+      // FROM "facultyCommittee" where faculty_id = '41'
         client.query(query, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -21,7 +22,6 @@ var Committee = {
       WHERE user_type = 'faculty' AND id NOT IN (SELECT DISTINCT faculty_id FROM "facultyCommittee")
     `;
     client.query(query, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -39,6 +39,16 @@ var Committee = {
           client.query(query)
       .then(res => new callback('success'))
       .catch(e => new callback('error'));
-  }
+  },
+
+  deleteCommittee: (client, facultyId, callback) => {
+    var query = `
+      DELETE FROM "facultyCommittee"
+      WHERE faculty_id = '${facultyId}'
+    `;
+        client.query(query)
+    .then(res => new callback('success'))
+    .catch(e => new callback('error'));
+}
 };
 module.exports = Committee;

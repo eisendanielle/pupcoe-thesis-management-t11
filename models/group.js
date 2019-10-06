@@ -26,7 +26,6 @@ var Group = {
         last_name: data.rows[0].adviser_last_name
       };
       callback(classData);
-      console.log(classData);
     });
   },
 
@@ -46,7 +45,6 @@ var Group = {
     INNER JOIN users ON classes.adviser=users.id
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -58,7 +56,6 @@ var Group = {
     groups
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -80,7 +77,6 @@ var Group = {
     client.query(insertQuery, groups)
       .then(res => new callback('success'))
       .catch(e => new callback('error'));
-      console.log(groups);
   },
 
   getStudentsByGroupId: (client, filter, callback) => {
@@ -91,7 +87,18 @@ var Group = {
     `;
       // WHERE c.class_id = ${classId}
         client.query(query, (req, data) => {
-      console.log(data.rows);
+      callback(data.rows);
+    });
+  },
+
+  getStudentsGroupDetails: (client, studentId, callback) => {
+    const query = `
+    SELECT *
+    FROM "groupStudents" c
+    INNER JOIN users u on u.id = '${studentId}';
+    `;
+
+    client.query(query, (req, data) => {
       callback(data.rows);
     });
   },
@@ -103,7 +110,6 @@ var Group = {
       WHERE user_type = 'student' AND id NOT IN (SELECT DISTINCT student_id FROM "groupStudents")
     `;
     client.query(query, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -123,6 +129,17 @@ var Group = {
           client.query(query)
       .then(res => new callback('success'))
       .catch(e => new callback('error'));
-  }
+  },
+
+
+  deleteStudent: (client, studentId, callback) => {
+    var query = `
+      DELETE FROM "groupStudents"
+      WHERE student_id = '${studentId}'
+    `;
+        client.query(query)
+    .then(res => new callback('success'))
+    .catch(e => new callback('error'));
+}
 };
 module.exports = Group;

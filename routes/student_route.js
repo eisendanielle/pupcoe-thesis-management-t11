@@ -27,12 +27,15 @@ studentRoute.get('/',
   function (req, res, next) {
   if (req.isAuthenticated() && req.user.user_type == 'student') {
     Class.getByStudentId(client, req.user.id, function(data) {
+      Group.getStudentsGroupDetails(client, req.user.id, function(group) {
       res.render('partials/student/profile', {
+        group: group[0].group_id,
         data: data,
         title: 'Profile',
-        layout: 'student'
+        layout: 'student' 
       });
-          });
+    });
+  });
   } else {
     res.redirect('/')
   }
@@ -48,7 +51,6 @@ studentRoute.get('/submit_abstract',
         title: 'Submit Abstract',
         layout: 'student'
       });
-            console.log(data);
       });
   } else {
     res.redirect('/')
@@ -61,14 +63,14 @@ studentRoute.get('/choose',
   if (req.isAuthenticated() && req.user.user_type == 'student') {
     Group.listGroups(client, {}, function(data) {
       Thesis.listAll(client, {}, function(thesis) {
-      res.render('partials/student/choose', {
-        data: data,
-        title: 'Submit Abstract',
-        layout: 'student',
-        thesis: thesis
+        res.render('partials/student/choose', {
+          data: data,
+          title: 'Submit Abstract',
+          layout: 'student',
+          thesis: thesis
+       });
       });
-      });
-      });
+    });
   } else {
     res.redirect('/')
   }

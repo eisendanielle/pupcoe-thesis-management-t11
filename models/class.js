@@ -24,7 +24,6 @@ var Class = {
         last_name: data.rows[0].adviser_last_name
       };
       callback(classData);
-      console.log(classData);
     });
   },
 
@@ -38,7 +37,6 @@ var Class = {
       WHERE adviser=${facultyId}
     `;
         client.query(query, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -51,7 +49,6 @@ var Class = {
       WHERE c.class_id = ${classId}
     `;
         client.query(query, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -69,7 +66,6 @@ var Class = {
     INNER JOIN users ON classes.adviser=users.id
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -112,8 +108,7 @@ var Class = {
       WHERE c.student_id = ${studentId}
     `;
     client.query(query, (req, data) => {
-      console.log(data.rows);
-      callback(data.rows);
+      callback(data.rows[0]);
     });
   },
 
@@ -131,7 +126,6 @@ var Class = {
       WHERE g.student_id = ${studentId}
     `;
     client.query(query, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -151,7 +145,6 @@ var Class = {
           client.query(query)
       .then(res => new callback('success'))
       .catch(e => new callback('error'));
-      console.log(query);
   }
 };
 

@@ -8,7 +8,6 @@ var Thesis = {
     thesis
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -20,7 +19,6 @@ var Thesis = {
     WHERE group_id = '${filter}'
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -33,7 +31,6 @@ var Thesis = {
     stage = 'pending'
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -47,7 +44,6 @@ var Thesis = {
     stage = 'for committee'
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -60,7 +56,7 @@ var Thesis = {
   //   stage = 'MOR'
   //   `;
   //   client.query(listQuery, (req, data) => {
-  //     console.log(data.rows);
+  // 
   //     callback(data.rows);
   //   });
   // },
@@ -82,7 +78,6 @@ var Thesis = {
     stage = 'MOR'
     `;
     client.query(listQuery, (req, data) => {
-      console.log(data.rows);
       callback(data.rows);
     });
   },
@@ -135,7 +130,6 @@ var Thesis = {
         client.query(query, thesis)
       .then(res => new callback('success'))
       .catch(e => new callback('error'));
-      console.log(thesis);
         }
   // updateStatusForDefense: (client, thesisData, callback) => {
   //   var thesis = [
